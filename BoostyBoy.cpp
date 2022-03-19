@@ -140,40 +140,7 @@ void BoostyBoy::onStatEvent(void* params)
 
 }
 
-void BoostyBoy::ballOnTop()
-{
-	if (!gameWrapper->IsInFreeplay()) { return; }
-	
-	ServerWrapper server = gameWrapper->GetCurrentGameState();
-	if (!server) { return; }
-	
-	if (!coolEnabled) { return; }
-	
-	BallWrapper ball = server.GetBall();
-	if (!ball) { return; }
-	
-	CarWrapper car = gameWrapper->GetLocalCar();
-	if (!car) { return; }
 
-
-	Vector carVelocity = car.GetVelocity();
-	ball.SetVelocity(carVelocity);
-
-	CVarWrapper distanceCVar = cvarManager->getCvar("cool_distance");
-	if (!distanceCVar) { return; }
-	float distance = distanceCVar.getFloatValue();
-	
-	
-
-	Vector carLocation = car.GetLocation();
-	float ballRadius = ball.GetRadius();
-	ball.SetLocation(carLocation + Vector{ 0 , 0 , distance });
-	
-	cvarManager->log("Used");
-
-
-
-}
 
 void BoostyBoy::newBoostToggle()
 {
